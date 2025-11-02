@@ -1,60 +1,53 @@
 // components/Footer.js
-'use client' // Add 'use client' just in case, though not strictly needed for this file
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react'
 import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-200 mt-16">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {/* Logo & Social */}
-          <div className="col-span-2 md:col-span-1">
-            <h2 className="text-2xl font-bold text-primary">Eventra</h2>
-            <p className="text-gray-500 text-sm mt-2">Your perfect event, simplified.</p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-gray-400 hover:text-gray-500"><Facebook /></a>
-              <a href="#" className="text-gray-400 hover:text-gray-500"><Instagram /></a>
-              <a href="#" className="text-gray-400 hover:text-gray-500"><Twitter /></a>
-              <a href="#" className="text-gray-400 hover:text-gray-500"><Linkedin /></a>
-            </div>
-          </div>
-          
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Quick Links</h3>
-            <ul className="mt-4 space-y-2">
-              <li><Link href="/" className="text-base text-gray-500 hover:text-gray-900">Home</Link></li>
-              <li><Link href="/#categories" className="text-base text-gray-500 hover:text-gray-900">Categories</Link></li>
-              <li><Link href="/#vendors" className="text-base text-gray-500 hover:text-gray-900">Vendors</Link></li>
-              <li><Link href="/login" className="text-base text-gray-500 hover:text-gray-900">Login</Link></li>
+    <footer className="bg-white border-t border-gray-100 mt-24">
+      <div className="container-xl py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+          {/* Company */}
+          <div className="col-span-2 lg:col-span-1">
+            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Company</h3>
+            <ul className="mt-4 space-y-3">
+              <li><Link href="/about" className="text-base text-gray-500 hover:text-gray-900">About</Link></li>
+              <li><Link href="/careers" className="text-base text-gray-500 hover:text-gray-900">Careers</Link></li>
+              <li><Link href="/press" className="text-base text-gray-500 hover:text-gray-900">Press</Link></li>
             </ul>
           </div>
 
-          {/* Company */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Company</h3>
-            <ul className="mt-4 space-y-2">
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">About Us</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Careers</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Blog</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Contact Us</a></li>
+          {/* For Vendors */}
+          <div className="col-span-1">
+            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">For Vendors</h3>
+            <ul className="mt-4 space-y-3">
+              <li><Link href="/vendor/register" className="text-base text-gray-500 hover:text-gray-900">Get on Board</Link></li>
+              <li><Link href="/vendor/login" className="text-base text-gray-500 hover:text-gray-900">Vendor Login</Link></li>
+              <li><Link href="/partners" className="text-base text-gray-500 hover:text-gray-900">Partnerships</Link></li>
+            </ul>
+          </div>
+          
+          {/* Support */}
+          <div className="col-span-1">
+            <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Support</h3>
+            <ul className="mt-4 space-y-3">
+              <li><Link href="/contact" className="text-base text-gray-500 hover:text-gray-900">Contact Us</Link></li>
+              <li><Link href="/faq" className="text-base text-gray-500 hover:text-gray-900">FAQ</Link></li>
             </ul>
           </div>
 
           {/* Legal */}
-          <div>
+          <div className="col-span-2 lg:col-span-1">
             <h3 className="text-sm font-semibold text-gray-900 tracking-wider uppercase">Legal</h3>
-            <ul className="mt-4 space-y-2">
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Privacy Policy</a></li>
-              <li><a href="#" className="text-base text-gray-500 hover:text-gray-900">Terms of Service</a></li>
+            <ul className="mt-4 space-y-3">
+              <li><Link href="/privacy" className="text-base text-gray-500 hover:text-gray-900">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-base text-gray-500 hover:text-gray-900">Terms of Service</Link></li>
             </ul>
           </div>
         </div>
-
-        {/* Bottom Bar */}
-        <div className="mt-8 border-t border-gray-200 pt-8 text-center">
-          <p className="text-base text-gray-400">&copy; {new Date().getFullYear()} Eventra. All rights reserved.</p>
+      </div>
+      <div className="bg-gray-50 border-t border-gray-200">
+        <div className="container-xl py-6 text-center md:text-left">
+          <p className="text-sm text-gray-500">&copy; {new Date().getFullYear()} Eventra. All rights reserved.</p>
         </div>
       </div>
     </footer>

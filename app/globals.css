@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
+/* 1. Define Light Mode variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFFFF; /* White */
+  --foreground: #111827; /* Dark Gray */
+  --background-soft: #F9FAFB; /* Off-white */
+  --border-color: #E5E7EB; /* Light gray border */
+
+  --primary: #FF5722; /* Your Orange/Red */
+  --primary-dark: #E64A19;
+  --wine: #8B1538; /* Your Maroon/Wine */
+  --wine-dark: #6a102b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* 2. Define Dark Mode variables */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0B0B0F; /* Very dark background */
+    --foreground: #F9FAFB; /* Light text */
+    --background-soft: #1D1D24; /* Darker card background */
+    --border-color: #374151; /* Gray border for dark mode */
+
+    /* Colors can stay the same or be adjusted */
+    --primary: #FF5722;
+    --primary-dark: #E64A19;
+    --wine: #8B1538;
+    --wine-dark: #6a102b;
   }
 }
 
+/* 3. Apply variables using Tailwind v4 @theme */
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-background-soft: var(--background-soft);
+  --color-border: var(--border-color);
+  
+  --font-sans: var(--font-sans);
+
+  --color-primary-DEFAULT: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-wine-DEFAULT: var(--wine);
+  --color-wine-dark: var(--wine-dark);
+}
+
+/* 4. Base body styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+/* 5. Reusable container class */
+@layer utilities {
+  .container-xl {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
 }

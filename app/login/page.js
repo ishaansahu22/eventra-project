@@ -2,75 +2,112 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { Lock, Mail } from 'lucide-react'
+
+// Validation Schema
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid email').required('Email is required'),
+  password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+})
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const handleLogin = (e) => {
-    e.preventDefault()
-    console.log('Login:', { email, password })
-  }
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: LoginSchema,
+    onSubmit: (values) => {
+      console.log('Login:', values)
+      alert('Login successful! (Check console for values)')
+    },
+  })
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-background text-foreground">
       {/* Left Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-wine mb-2">Eventra</h1>
-            <p className="text-gray-600">Welcome back! Please enter your details.</p>
+            <Link href="/" className="text-4xl font-bold text-wine-DEFAULT mb-2">Eventra</Link>
+            <p className="text-foreground/70">Welcome back! Please enter your details.</p>
           </div>
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form onSubmit={formik.handleSubmit} className="space-y-4">
+            {/* Email Field */}
             <div>
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wine"
-                required
-              />
+              <label htmlFor="email" className="block text-sm font-medium text-foreground/70 sr-only">Email</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Email Address"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  className={`w-full pl-10 pr-4 py-3 bg-background-soft border rounded-lg text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 ${formik.touched.email && formik.errors.email ? 'border-red-500 ring-red-500' : 'border-border focus:ring-wine'}`}
+                />
+              </div>
+              {formik.touched.email && formik.errors.email ? (
+                <p className="mt-1 text-sm text-red-600">{formik.errors.email}</p>
+              ) : null}
             </div>
 
+            {/* Password Field */}
             <div>
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-wine"
-                required
-              />
+              <label htmlFor="password" className="block text-sm font-medium text-foreground/70 sr-only">Password</label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-gray-400" />
+                </div>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                  className={`w-full pl-10 pr-4 py-3 bg-background-soft border rounded-lg text-foreground placeholder-gray-400 focus:outline-none focus:ring-2 ${formik.touched.password && formik.errors.password ? 'border-red-500 ring-red-500' : 'border-border focus:ring-wine'}`}
+                />
+              </div>
+              {formik.touched.password && formik.errors.password ? (
+                <p className="mt-1 text-sm text-red-600">{formik.errors.password}</p>
+              ) : null}
             </div>
 
             <div className="text-right">
-              <Link href="/forgot-password" className="text-wine hover:underline">
+              <Link href="/forgot-password" className="text-sm text-wine-DEFAULT hover:underline">
                 Forgot Password?
               </Link>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-wine text-white py-3 rounded-lg hover:bg-wine/90 font-semibold"
+              className="w-full bg-wine-DEFAULT text-white py-3 rounded-lg hover:bg-wine-dark font-semibold transition-colors"
             >
               Login
             </button>
 
-            <div className="relative my-6">
+            <div className="relative my-4">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-50 text-gray-500">OR</span>
+                <span className="px-2 bg-background text-foreground/50">OR</span>
               </div>
             </div>
 
+            {/* Social Logins */}
             <button
               type="button"
-              className="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-50 flex items-center justify-center space-x-2"
+              className="w-full border border-border py-3 rounded-lg hover:bg-background-soft flex items-center justify-center space-x-2 transition-colors text-foreground/90"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -80,21 +117,11 @@ export default function LoginPage() {
               </svg>
               <span>Continue with Google</span>
             </button>
-
-            <button
-              type="button"
-              className="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-50 flex items-center justify-center space-x-2"
-            >
-              <svg className="w-5 h-5" fill="#1877F2" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-              <span>Continue with Facebook</span>
-            </button>
           </form>
 
-          <p className="mt-8 text-center text-gray-600">
+          <p className="mt-8 text-center text-foreground/70">
             Don't have an account?{' '}
-            <Link href="/signup" className="text-wine font-semibold hover:underline">
+            <Link href="/signup" className="text-wine-DEFAULT font-semibold hover:underline">
               Signup
             </Link>
           </p>

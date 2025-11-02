@@ -1,77 +1,73 @@
 // components/Navbar.js
 'use client'
 import Link from 'next/link'
-import { Menu, X, User, LogIn } from 'lucide-react'
 import { useState } from 'react'
+import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // Mock auth state
+
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/search' },
+    { name: 'Vendors', href: '/search' },
+    { name: 'About Us', href: '/about' },
+  ]
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+    <nav className="absolute top-0 left-0 right-0 z-50 pt-6">
+      <div className="container-xl">
+        <div className="flex justify-between items-center bg-white/90 backdrop-blur-md rounded-xl shadow-sm px-6 py-4">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-2xl font-bold text-primary">
-              Eventra
-            </Link>
-          </div>
+          <Link href="/" className="text-3xl font-bold text-primary">
+            Eventra
+          </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden sm:ml-6 sm:flex sm:space-x-8 sm:items-center">
-            <Link href="/" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
-              Home
-            </Link>
-            <Link href="/#categories" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
-              Categories
-            </Link>
-            <Link href="/#vendors" className="text-gray-500 hover:text-gray-900 inline-flex items-center px-1 pt-1 text-sm font-medium">
-              Vendors
-            </Link>
-            {isLoggedIn ? (
-              <Link href="/profile" className="flex items-center text-gray-500 hover:text-gray-900">
-                <User className="h-5 w-5 mr-1" />
-                Profile
+          <div className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <Link key={link.name} href={link.href} className="font-medium text-gray-600 hover:text-primary transition-colors">
+                {link.name}
               </Link>
-            ) : (
-              <Link href="/login" className="flex items-center bg-primary text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-dark">
-                <LogIn className="h-5 w-5 mr-1" />
-                Login
-              </Link>
-            )}
+            ))}
+            <Link href="/login" className="font-medium text-gray-600 hover:text-primary transition-colors">
+              Login
+            </Link>
+            <Link href="/signup" className="bg-primary text-white px-5 py-2.5 rounded-lg font-medium hover:bg-primary-dark transition-colors">
+              Sign Up
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="-mr-2 flex items-center sm:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+          <div className="md:hidden">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden`} id="mobile-menu">
-        <div className="pt-2 pb-3 space-y-1">
-          <Link href="/" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Home</Link>
-          <Link href="/#categories" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Categories</Link>
-          <Link href="/#vendors" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Vendors</Link>
-          {isLoggedIn ? (
-            <Link href="/profile" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Profile</Link>
-          ) : (
-            <Link href="/login" className="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800">Login</Link>
-          )}
+      {isOpen && (
+        <div className="md:hidden absolute top-24 left-0 right-0 container-xl px-4">
+          <div className="bg-white rounded-lg shadow-xl overflow-hidden mx-4">
+            <nav className="flex flex-col p-4 space-y-2">
+              {navLinks.map((link) => (
+                <Link key={link.name} href={link.href} className="block px-4 py-2 text-lg font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-primary">
+                  {link.name}
+                </Link>
+              ))}
+              <hr className="my-2" />
+              <Link href="/login" className="block px-4 py-2 text-lg font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-primary">
+                Login
+              </Link>
+              <Link href="/signup" className="block text-center bg-primary text-white px-5 py-3 rounded-lg font-medium hover:bg-primary-dark transition-colors">
+                Sign Up
+              </Link>
+            </nav>
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   )
 }
