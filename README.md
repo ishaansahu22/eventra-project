@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Eventra - Wedding & Event Vendor Platform
 
-## Getting Started
+Eventra is the responsive frontend for a modern platform designed to connect users with wedding and event vendors in Bihar. This project was built as part of the TechieHelp Frontend Developer Internship.
 
-First, run the development server:
+This repository contains the code for the primary customer-facing website, including vendor discovery, booking, and user management pages.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### ✨ Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A live version of this project is deployed on Vercel:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**[https://eventra-project-final.vercel.app](https://eventra-project-final.vercel.app)** *(This is your last known Vercel link. You can update it if you have a new one.)*
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🚀 Features Implemented
 
-To learn more about Next.js, take a look at the following resources:
+The customer-facing website is complete and responsive, supporting both light and dark modes.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **Homepage:** A modern, multi-section landing page with a hero search bar, category browsing, and "How It Works" section.
+* **Sign Up & Login:** Fully functional forms with client-side validation using Formik and Yup.
+* **Category Search Page:** A dynamic page that displays a grid of vendors based on the category selected from the homepage.
+* **Vendor Detail Page:** A dynamic page that displays detailed information, reviews, and services for a specific vendor./page.js, Screenshot 2025-11-02 070739.png]
+* **Checkout Page:** A clean, multi-column checkout form with validation to collect user booking details.
+* **User Profile Page:** A dashboard-style page for users to view their profile information and list of "My Bookings."
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project was built using the stack defined in the internship guide:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **Framework:** Next.js (App Router)
+* **Styling:** Tailwind CSS (v4) with a dark-mode-compatible theme.
+* **Forms:** Formik for form state management.
+* **Validation:** Yup for schema-based form validation.
+* **Icons:** Lucide React
+* **Deployment:** Vercel
+
+---
+
+## 🏁 Getting Started
+
+To run this project locally:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/ishaansahu22/eventra-project.git](https://github.com/ishaansahu22/eventra-project.git)
+    cd eventra-project
+    ```
+
+2.  **Install dependencies:**
+    *(This project uses npm)*
+    ```bash
+    npm install
+    ```
+
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+4.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
