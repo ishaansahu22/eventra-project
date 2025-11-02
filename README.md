@@ -8,7 +8,7 @@ This repository contains the code for the primary customer-facing website, inclu
 
 A live version of this project is deployed on Vercel:
 
-**[https://eventra-project-final.vercel.app](https://eventra-project-final.vercel.app)** *(This is your last known Vercel link. You can update it if you have a new one.)*
+**[https://eventra-project-final.vercel.app](https://eventra-project-final.vercel.app)** 
 
 ---
 
